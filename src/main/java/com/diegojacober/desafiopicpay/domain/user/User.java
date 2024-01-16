@@ -2,6 +2,8 @@ package com.diegojacober.desafiopicpay.domain.user;
 
 import java.math.BigDecimal;
 
+import com.diegojacober.desafiopicpay.dtos.user.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,4 +39,14 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    public User(UserDTO dto) {
+        this.balance = dto.balance();
+        this.document = dto.document();
+        this.email = dto.email();
+        this.firstName = dto.firstName();
+        this.lastName = dto.lastName();
+        this.password = dto.password();
+        this.userType = dto.userType();
+    }
 }

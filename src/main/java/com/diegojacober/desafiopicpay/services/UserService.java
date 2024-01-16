@@ -1,12 +1,14 @@
 package com.diegojacober.desafiopicpay.services;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.diegojacober.desafiopicpay.domain.user.User;
 import com.diegojacober.desafiopicpay.domain.user.UserType;
+import com.diegojacober.desafiopicpay.dtos.user.UserDTO;
 import com.diegojacober.desafiopicpay.repositories.UserRepository;
 
 @Service
@@ -31,5 +33,14 @@ public class UserService {
 
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    public User createUser(UserDTO user) {
+        User newUser = new User(user);
+        return userRepository.save(newUser);
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
     }
 }
