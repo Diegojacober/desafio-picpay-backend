@@ -28,6 +28,9 @@ public class TransactionService {
     @Autowired
     private TransactionRepository repository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Value("${services.authorizeTransactions.url}")
     private String authorizeTransactionsURL;
 
@@ -54,6 +57,9 @@ public class TransactionService {
         repository.save(newTransaction);
         userService.saveUser(receiver);
         userService.saveUser(sender);
+
+        notificationService.sendNotification(sender, "Transação realizada com sucesso!");
+        notificationService.sendNotification(receiver, "Nova transação recebida!");
         
         return newTransaction;
     }
